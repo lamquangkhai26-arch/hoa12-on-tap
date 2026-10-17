@@ -1,333 +1,127 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#123b68">
 <title>Kiểm tra ôn tập Hóa học 12</title>
 <style>
-:root{--navy:#123b68;--blue:#2463a6;--bg:#f3f6fb;--ink:#17263e;--green:#16794b;--red:#b42318;--line:#d8e1ee}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Arial,Helvetica,sans-serif}
-header{background:linear-gradient(115deg,#102f54,#265e9e);color:white;padding:22px 16px}
-.wrap{max-width:980px;margin:auto;padding:0 14px}header h1{margin:0;font-size:clamp(22px,4vw,32px)}header p{margin:5px 0 0;opacity:.9}
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px auto;box-shadow:0 4px 18px #18365a0b}
-label{display:block;font-weight:700;margin:12px 0 5px}input[type=text],input[type=number]{width:100%;padding:12px;border:1px solid #b9c8da;border-radius:9px;font-size:16px}
-button{border:0;border-radius:10px;padding:12px 18px;background:var(--blue);color:#fff;font-weight:700;font-size:16px;cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.secondary{background:#e8eef7;color:var(--navy)}.danger{background:var(--red)}.hidden{display:none!important}
-.notice{background:#fff7df;border:1px solid #f0d68a;border-radius:10px;padding:12px;margin:12px 0}.small{font-size:13px;color:#5a6b80}.pill{display:inline-block;background:#eaf1fb;border-radius:99px;padding:4px 10px;font-size:13px;font-weight:700;color:var(--navy)}
-.topbar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:10px 0}
-.stats{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.timer{font-size:22px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}.progress{height:7px;background:#e5ebf3;border-radius:99px;overflow:hidden;margin-top:8px}.progress>div{height:100%;background:#27845a;width:0}
-.q{border:1px solid var(--line);border-radius:13px;padding:16px;margin:14px 0;background:#fff;scroll-margin-top:110px}.q h3{font-size:17px;margin:0 0 12px}.qnum{color:var(--blue);font-weight:800}.opt{display:flex;gap:10px;align-items:flex-start;padding:10px;border:1px solid #e0e7f0;border-radius:9px;margin:8px 0;cursor:pointer}.opt:has(input:checked){border-color:#4283c7;background:#f1f7ff}.opt input{margin-top:5px;flex-shrink:0}.tfrow{padding:10px 0;border-bottom:1px solid #edf0f5}.tfrow:last-child{border-bottom:0}.tfrow p{margin:0 0 6px}.tfchoices{display:flex;gap:18px}.tfchoices label{display:flex;gap:5px;align-items:center;margin:0;font-weight:500}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.resultscore{font-size:32px;font-weight:900;color:var(--navy)}.review{padding:12px;border-radius:10px;margin:10px 0;border:1px solid var(--line)}.correct{background:#effaf3;border-color:#9ed5b3}.incorrect{background:#fff1f0;border-color:#f1b0ab}.resulttag{font-weight:800}.footer{padding:20px;text-align:center;color:#65758a;font-size:13px}
-@media(max-width:600px){.card{padding:14px}.q{padding:12px}.timer{font-size:20px}button{width:100%}.actions button{flex:1}}
-</style>
-</head>
+:root{--navy:#123b68;--blue:#1769aa;--light:#eef5fc;--ink:#172638;--muted:#627286;--green:#137547;--red:#b42318;--line:#dbe4ee}
+*{box-sizing:border-box}body{margin:0;background:#f3f6fa;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+header{background:linear-gradient(135deg,#123b68,#1874b8);color:white;padding:24px 16px 30px;text-align:center}header h1{font-size:clamp(1.35rem,4vw,2rem);margin:0 0 6px}header p{margin:0;opacity:.92}
+.wrap{width:min(900px,100%);margin:auto;padding:16px}.panel,.question{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 4px 16px #183b5d0b}
+h2{font-size:1.15rem;margin:0 0 12px;color:var(--navy)}label{font-weight:700;display:block;margin:10px 0 5px}
+input[type=text]{width:100%;padding:12px;border:1px solid #bdcad8;border-radius:10px;font-size:1rem;background:white}
+button{border:0;border-radius:12px;padding:13px 18px;font-size:1rem;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:white}.secondary{background:#e7eef7;color:var(--navy)}button:disabled{opacity:.55;cursor:not-allowed}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.statusbar{position:sticky;top:0;z-index:5;background:#ffffffed;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 16px}
+.statusinner{max-width:868px;margin:auto;display:flex;justify-content:space-between;gap:10px;align-items:center;font-weight:700}#timer{color:var(--red);font-variant-numeric:tabular-nums}
+.qtitle{font-weight:700;margin:0 0 12px}.options{display:grid;gap:8px}.option{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer}.option:has(input:checked){border-color:var(--blue);background:var(--light)}.option input{margin-top:4px;transform:scale(1.15)}
+.substatement{padding:12px 0;border-top:1px solid #edf1f5}.tfline{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.tfline .choices{display:flex;gap:16px}.choices label{font-weight:400;margin:0;display:flex;gap:5px;align-items:center}
+.shortinput{max-width:100%;width:100%;min-width:0}
+.qnav{padding:10px 12px;margin:10px 0;position:sticky;top:88px;z-index:4}
+.qnavhead{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.88rem;font-weight:700;margin-bottom:8px}
+.qnavgrid{display:flex;flex-wrap:nowrap;gap:3px;overflow-x:auto;overflow-y:hidden;padding:3px 2px 6px;scrollbar-width:thin}.qnavbtn{flex:0 0 25px;width:25px}
+.qnavbtn{padding:7px 2px;border:1px solid #cbd5e1;background:#f8fafc;color:#334155;border-radius:7px;font-size:.82rem;line-height:1.2;min-width:0}
+.qnavbtn.answered{background:#dcfce7;border-color:#16a34a;color:#166534}
+.qnavbtn.partial{background:#fef3c7;border-color:#d97706;color:#92400e}
+.qnavbtn.current{outline:2px solid #1769aa;outline-offset:1px}
+.qnavlegend{display:flex;gap:10px;flex-wrap:wrap;font-size:.75rem;color:var(--muted);margin-top:7px}
+.qnavlegend span{display:inline-flex;align-items:center;gap:4px}
+.qdot{display:inline-block;width:9px;height:9px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc}
+.qdot.done{background:#dcfce7;border-color:#16a34a}.qdot.part{background:#fef3c7;border-color:#d97706}.note{color:var(--muted);font-size:.92rem}.hidden{display:none!important}#result{border:2px solid #c7d9eb}.score{font-size:2.4rem;font-weight:800;color:var(--navy);line-height:1.15}.resultitem{padding:12px 0;border-top:1px solid var(--line)}.correct{color:var(--green);font-weight:700}.wrong{color:var(--red);font-weight:700}
+#warning{color:var(--red);font-size:.9rem;font-weight:700}footer{text-align:center;color:var(--muted);font-size:.85rem;padding:12px 18px 28px}
+@media(max-width:520px){.qnav{top:88px;padding:6px}.qnavgrid{gap:2px}.qnavbtn{flex-basis:23px;width:23px;padding:6px 0;font-size:.72rem}.wrap{padding:10px}.panel,.question{padding:14px;border-radius:13px}.statusinner{font-size:.92rem}.tfline{align-items:flex-start}.tfline .choices{width:100%;justify-content:flex-start}.score{font-size:2rem}}
+@media print{header,.statusbar,.row,#login,footer{display:none!important}body{background:white}.panel,.question{box-shadow:none;break-inside:avoid}}
+</style></head>
 <body>
-<header><div class="wrap"><h1>ÔN TẬP KIỂM TRA HÓA HỌC 12</h1><p>Chương 1: Ester – Lipid · Chương 2: Carbohydrate</p></div></header>
-<div class="wrap">
-<section id="login" class="card">
-<h2>Thông tin học sinh</h2>
-<p>Đề kiểm tra gồm 28 câu: 18 câu trắc nghiệm, 4 câu đúng/sai (mỗi câu có 4 ý), 6 câu trả lời ngắn. Thời gian làm bài: <b>40 phút</b>.</p>
-<label for="studentName">Họ và tên</label><input id="studentName" type="text" maxlength="100" placeholder="Nhập đầy đủ họ và tên">
+<header><h1>KIỂM TRA ÔN TẬP HÓA HỌC 12</h1><p>Chương 1: Ester – Lipid · Chương 2: Carbohydrate</p><p>Thời gian: 40 phút · Tổng điểm: 10,00</p></header>
+<main class="wrap">
+<section class="panel" id="login"><h2>Thông tin học sinh</h2><p class="note">Nhập họ tên và lớp trước khi bắt đầu.</p>
+<label for="studentName">Họ và tên</label><input id="studentName" type="text" maxlength="100" placeholder="Nhập họ và tên">
 <label for="studentClass">Lớp</label><input id="studentClass" type="text" maxlength="30" placeholder="Ví dụ: 12A1">
-<div class="notice"><b>Lưu ý:</b> Không thoát khỏi màn hình làm bài. Nếu chuyển sang ứng dụng/tab khác hoặc rời màn hình 3 lần, hệ thống sẽ tự động nộp bài. Khi nộp, hệ thống hiển thị điểm và các câu/ý đúng sai.</div>
-<button id="startBtn">Bắt đầu làm bài</button>
-<p class="small">Mỗi nhóm từ 1 đến 28 được chọn ngẫu nhiên một câu. Thứ tự câu và thứ tự đáp án được trộn khi bắt đầu làm bài.</p>
-</section>
-<section id="exam" class="hidden">
-<div class="topbar"><div class="wrap stats"><div><span class="pill" id="studentBadge"></span><div class="small" id="progressText">Đã trả lời 0/28 câu</div></div><div><div class="timer" id="timer">40:00</div><div class="small">Số lần rời màn hình: <b id="exitCount">0/3</b></div></div></div><div class="wrap progress"><div id="progressBar"></div></div></div>
-<div id="questions"></div>
-<div class="actions"><button id="submitBtn" class="danger">Nộp bài</button></div>
-<p class="small">Bài sẽ tự động nộp khi hết 40 phút hoặc khi rời màn hình 3 lần.</p>
-</section>
-<section id="results" class="card hidden"></section>
-</div>
-<div class="footer">Ứng dụng ôn tập Hóa học 12 · Dành cho học sinh làm bài trên điện thoại hoặc máy tính</div>
+<p id="loginError" class="wrong hidden">Vui lòng nhập đầy đủ họ tên và lớp.</p><button class="primary" id="startBtn">Bắt đầu làm bài</button></section>
+<section id="exam" class="hidden"><div class="statusbar"><div class="statusinner"><span id="studentBadge">Học sinh</span><span>Còn lại: <span id="timer">40:00</span></span></div><div class="statusinner"><span id="leaveCount">Số lần rời màn hình: 0/3</span><span id="warning"></span></div></div>
+<section class="panel qnav" id="questionNavigator"><div class="qnavhead"><span>TIẾN ĐỘ 28 CÂU</span><span id="navProgress">Đã trả lời 0/28</span></div><div class="qnavgrid" id="navGrid"></div><div class="qnavlegend"><span><i class="qdot"></i> Chưa trả lời</span><span><i class="qdot done"></i> Đã trả lời</span><span><i class="qdot part"></i> Đang làm dở</span></div></section>
+<div class="panel"><h2>Hướng dẫn làm bài</h2><ul><li>Phần I: 18 câu trắc nghiệm, mỗi câu đúng 0,25 điểm.</li><li>Phần II: 4 câu đúng/sai, mỗi ý đúng 0,25 điểm.</li><li>Phần III: 6 câu trả lời ngắn, mỗi câu đúng 0,25 điểm.</li><li>Tổng cộng 40 điểm thành phần × 0,25 = 10,00 điểm.</li></ul><p class="note">Lưu ý: nếu chuyển sang ứng dụng khác, khóa màn hình hoặc rời tab kiểm tra, hệ thống ghi nhận một lần. Đến lần thứ 3, bài sẽ tự động nộp.</p></div>
+<div id="mcqContainer"></div><div id="tfContainer"></div><div id="shortContainer"></div>
+<div class="panel"><b>Kiểm tra lại bài làm trước khi nộp.</b><p><button class="primary" id="submitBtn">Nộp bài và xem kết quả</button></p></div></section>
+<section class="panel hidden" id="result" aria-live="polite"><h2>KẾT QUẢ BÀI KIỂM TRA</h2><p id="resultStudent"></p><div class="score" id="scoreText">0,00 / 10,00</div><p id="scoreDetail"></p><p id="sendStatus" class="note"></p><div id="review"></div><div class="row" style="margin-top:16px"><button class="secondary" id="printBtn">In / lưu PDF</button><button class="primary" id="retryBtn">Làm bài mới</button></div></section>
+</main><footer>Ôn tập Hóa học 12 · Chương 1 và Chương 2</footer>
 <script>
-/* NGÂN HÀNG CÂU HỎI: mỗi mảng con tương ứng một nhóm; đáp án được xác định bằng chỉ số correct (0=A, 1=B, 2=C, 3=D). */
-const mcGroups = [
-[
-{q:"Tên gọi của ester HCOOC₂H₅ là",o:["methyl formate","ethyl formate","methyl acetate","ethyl acetate"],a:1},
-{q:"Tên gọi của ester CH₃COOCH₃ là",o:["methyl acetate","ethyl acetate","methyl formate","ethyl formate"],a:0},
-{q:"Tên gọi của CH₃CH₂COOCH₃ là",o:["ethyl propanoate","methyl propanoate","methyl acetate","propyl formate"],a:1},
-{q:"Tên gọi của CH₃COOC₂H₅ là",o:["ethyl propanoate","methyl propanoate","ethyl acetate","propyl formate"],a:2}
-],
-[
-{q:"Ester isoamyl acetate có mùi chuối chín. Công thức phân tử của ester này là",o:["C₇H₁₄O₂","C₅H₁₀O₂","C₈H₁₆O₂","C₆H₁₂O₂"],a:0},
-{q:"Ester ethyl butyrate (ethyl butanoate) thường được liên hệ với mùi dứa. Công thức phân tử là",o:["C₇H₁₄O₂","C₅H₁₀O₂","C₈H₁₆O₂","C₆H₁₂O₂"],a:0},
-{q:"Ester methyl butanoate có công thức phân tử là",o:["C₄H₈O₂","C₅H₁₀O₂","C₆H₁₂O₂","C₇H₁₄O₂"],a:0},
-{q:"Ester ethyl acetate có công thức phân tử là",o:["C₃H₆O₂","C₅H₁₀O₂","C₄H₈O₂","C₆H₁₂O₂"],a:2},
-{q:"Ester benzyl acetate có công thức phân tử là",o:["C₉H₁₀O₂","C₈H₈O₂","C₁₀H₁₂O₂","C₉H₁₂O₂"],a:2}
-],
-[
-{q:"Số đồng phân ester có công thức phân tử C₃H₆O₂ là",o:["1","2","3","4"],a:1},
-{q:"Số đồng phân ester C₅H₁₀O₂ khi thủy phân trong NaOH thu được sodium formate (HCOONa) là",o:["2","3","4","5"],a:2},
-{q:"Số đồng phân ester C₅H₁₀O₂ khi thủy phân trong NaOH thu được sodium acetate (CH₃COONa) là",o:["1","2","3","4"],a:1},
-{q:"Số đồng phân ester có công thức phân tử C₂H₄O₂ là",o:["1","2","3","4"],a:0},
-{q:"Số đồng phân ester C₄H₈O₂ khi thủy phân trong NaOH thu được sodium formate là",o:["1","2","3","4"],a:2}
-],
-[
-{q:"Phản ứng nào sau đây xảy ra thuận nghịch?",o:["Thủy phân ethyl acetate trong NaOH","Thủy phân ethyl acetate trong acid","Xà phòng hóa chất béo bằng NaOH","Hydrogen hóa chất béo có gốc không no"],a:1},
-{q:"Phản ứng nào sau đây được xem là một chiều?",o:["Thủy phân ester trong acid","Điều chế ester từ acid và alcohol","Xà phòng hóa ester trong NaOH","Cả A và B"],a:2},
-{q:"Chất béo là",o:["muối của acid béo","triester của glycerol với acid béo","ester đơn chức của alcohol","hỗn hợp carbohydrate"],a:1},
-{q:"Xà phòng là muối sodium hoặc potassium của",o:["acid béo","acetic acid","benzoic acid","phenol"],a:0}
-],
-[
-{q:"Chất béo (C₁₅H₃₁COO)₃C₃H₅ có tên là",o:["tripalmitin","tristearin","triolein","trilinolein"],a:0},
-{q:"Chất béo (C₁₇H₃₅COO)₃C₃H₅ có tên là",o:["tripalmitin","tristearin","triolein","trilinolein"],a:1},
-{q:"Chất béo (C₁₇H₃₃COO)₃C₃H₅ có tên là",o:["tripalmitin","tristearin","triolein","trilinolein"],a:2},
-{q:"Chất béo (C₁₇H₃₁COO)₃C₃H₅ có tên là",o:["tripalmitin","tristearin","triolein","trilinolein"],a:3}
-],
-[
-{q:"Xà phòng hóa tripalmitin bằng NaOH tạo ra",o:["glycerol và palmitic acid","glycerol và sodium palmitate","ethanol và sodium palmitate","glycerol và sodium stearate"],a:1},
-{q:"Xà phòng hóa tristearin bằng KOH tạo ra",o:["glycerol và potassium stearate","glycerol và stearic acid","ethanol và potassium stearate","glycerol và potassium palmitate"],a:0},
-{q:"Xà phòng hóa triolein bằng NaOH tạo ra",o:["glycerol và oleic acid","glycerol và sodium oleate","ethanol và sodium oleate","glycerol và sodium stearate"],a:1},
-{q:"Xà phòng hóa trilinolein bằng NaOH tạo ra",o:["glycerol và linoleic acid","glycerol và sodium linoleate","ethanol và sodium linoleate","glycerol và sodium oleate"],a:1}
-],
-[
-{q:"Công thức nào sau đây là xà phòng?",o:["C₁₅H₃₁COONa","CH₃(CH₂)₁₁OSO₃Na","CH₃(CH₂)₁₁C₆H₄SO₃Na","CH₃COONa"],a:0},
-{q:"Công thức nào sau đây là chất giặt rửa tổng hợp?",o:["C₁₇H₃₅COONa","C₁₅H₃₁COOK","CH₃(CH₂)₁₁C₆H₄SO₃Na","C₁₇H₃₃COONa"],a:2},
-{q:"Cặp chất đều là xà phòng là",o:["C₁₅H₃₁COONa và C₁₇H₃₃COOK","C₁₅H₃₁COONa và CH₃(CH₂)₁₁OSO₃Na","CH₃(CH₂)₁₁OSO₃Na và CH₃(CH₂)₁₁C₆H₄SO₃Na","CH₃COONa và C₁₅H₃₁COONa"],a:0}
-],
-[
-{q:"Phản ứng điều chế ethyl acetate là",o:["CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O","CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + H₂","CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + NaOH","HCOOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O"],a:0},
-{q:"Phản ứng điều chế methyl acetate là",o:["CH₃COOH + CH₃OH ⇌ CH₃COOCH₃ + H₂O","CH₃COOH + CH₃OH → CH₃COOCH₃ + H₂","HCOOH + CH₃OH ⇌ CH₃COOCH₃ + H₂O","CH₃COOH + CH₃OH → CH₃COOCH₃ + NaOH"],a:0},
-{q:"Phản ứng điều chế ethyl butyrate (ethyl butanoate) là",o:["CH₃CH₂CH₂COOH + C₂H₅OH ⇌ CH₃CH₂CH₂COOC₂H₅ + H₂O","CH₃COOH + C₂H₅OH ⇌ CH₃CH₂CH₂COOC₂H₅ + H₂O","CH₃CH₂CH₂COOH + C₂H₅OH → CH₃CH₂CH₂COOC₂H₅ + H₂","HCOOH + C₂H₅OH ⇌ CH₃CH₂CH₂COOC₂H₅ + H₂O"],a:0},
-{q:"Phản ứng điều chế propyl acetate là",o:["CH₃COOH + CH₃OH ⇌ CH₃COOC₃H₇ + H₂O","CH₃COOH + C₃H₇OH ⇌ CH₃COOC₃H₇ + H₂O","C₂H₅COOH + C₃H₇OH ⇌ CH₃COOC₃H₇ + H₂O","CH₃COOH + C₃H₇OH → CH₃COOC₃H₇ + H₂"],a:1},
-{q:"Phản ứng điều chế ethyl methanoate (ethyl formate) là",o:["CH₃COOH + C₂H₅OH ⇌ HCOOC₂H₅ + H₂O","HCOOH + CH₃OH ⇌ HCOOC₂H₅ + H₂O","HCOOH + C₂H₅OH ⇌ HCOOC₂H₅ + H₂O","HCOOH + C₂H₅OH → HCOOC₂H₅ + H₂"],a:2}
-],
-[
-{q:"Acid béo CH₃(CH₂)₄CH=CHCH₂CH=CH(CH₂)₇COOH thuộc nhóm",o:["omega-3","omega-6","omega-7","omega-9"],a:1},
-{q:"Acid béo có liên kết đôi đầu tiên ở carbon số 9 tính từ đầu methyl thuộc nhóm",o:["omega-3","omega-6","omega-9","omega-12"],a:2},
-{q:"Acid béo CH₃(CH₂)₇CH=CH(CH₂)₇COOH thuộc nhóm",o:["omega-3","omega-6","omega-7","omega-9"],a:3},
-{q:"Acid béo có liên kết đôi đầu tiên ở carbon số 6 tính từ đầu methyl thuộc nhóm",o:["omega-3","omega-6","omega-9","omega-12"],a:1}
-],
-[
-{q:"Stearic acid có công thức là",o:["C₁₇H₃₃COOH","C₁₇H₃₅COOH","C₁₇H₃₁COOH","C₁₅H₂₉COOH"],a:1},
-{q:"Palmitic acid có công thức là",o:["C₁₇H₃₅COOH","C₁₅H₃₁COOH","C₁₇H₃₃COOH","C₁₅H₂₉COOH"],a:1},
-{q:"Oleic acid có công thức là",o:["C₁₇H₃₅COOH","C₁₇H₃₃COOH","C₁₇H₃₁COOH","C₁₅H₃₁COOH"],a:1},
-{q:"Linoleic acid có công thức là",o:["C₁₇H₃₅COOH","C₁₇H₃₃COOH","C₁₇H₃₁COOH","C₁₅H₃₁COOH"],a:2}
-],
-[
-{q:"Chất béo nào sau đây thường ở trạng thái rắn ở điều kiện thường?",o:["triolein","tristearin","trilinolein","triacetate"],a:1},
-{q:"Chất béo nào sau đây thường ở trạng thái lỏng ở điều kiện thường?",o:["tristearin","tripalmitin","triolein","tricellulose"],a:2},
-{q:"Chất béo nào sau đây thường ở trạng thái rắn ở điều kiện thường?",o:["triolein","trilinolein","trilinolenin","tripalmitin"],a:3},
-{q:"Chất béo nào sau đây thường ở trạng thái lỏng ở điều kiện thường?",o:["tristearin","tripalmitin","trilinolein","sodium stearate"],a:2}
-],
-[
-{q:"Glucose và fructose thuộc nhóm",o:["monosaccharide","disaccharide","polysaccharide","ester"],a:0},
-{q:"Saccharose và maltose thuộc nhóm",o:["monosaccharide","disaccharide","polysaccharide","lipid"],a:1},
-{q:"Tinh bột và cellulose thuộc nhóm",o:["monosaccharide","disaccharide","polysaccharide","ester"],a:2}
-],
-[
-{q:"Carbohydrate thường có công thức gần đúng là",o:["Cₙ(H₂O)ₙ","CₙH₂ₙ","CₙHₙ","Cₙ(HO)ₙ"],a:0},
-{q:"Công thức phân tử của glucose là",o:["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)ₙ","C₅H₁₀O₅"],a:0},
-{q:"Công thức phân tử của fructose là",o:["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)ₙ","C₅H₁₀O₅"],a:0},
-{q:"Công thức phân tử của saccharose là",o:["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)ₙ","C₂H₅OH"],a:1},
-{q:"Công thức mắt xích của tinh bột là",o:["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)ₙ","C₂H₅OH"],a:2},
-{q:"Công thức phân tử của maltose là",o:["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)ₙ","C₂H₅OH"],a:1}
-],
-[
-{q:"Đơn vị cấu tạo nên tinh bột là",o:["glucose","fructose","saccharose","ethanol"],a:0},
-{q:"Cellulose có liên kết glycoside đặc trưng là",o:["α-1,4","α-1,6","β-1,4","α-1,2"],a:2},
-{q:"Trong amylopectin có",o:["chỉ liên kết α-1,4","liên kết α-1,4 và α-1,6","chỉ liên kết β-1,4","liên kết α-1,2"],a:1},
-{q:"Saccharose được tạo bởi",o:["glucose và fructose","glucose và glucose","fructose và fructose","glucose và cellulose"],a:0},
-{q:"Maltose được tạo bởi",o:["glucose và fructose","hai đơn vị glucose","fructose và fructose","glucose và saccharose"],a:1},
-{q:"Glucose phản ứng với thuốc thử Tollens tạo",o:["kết tủa bạc","màu xanh tím","không phản ứng","khí CO₂"],a:0},
-{q:"Thuốc thử đặc trưng để nhận biết tinh bột là",o:["iodine","AgNO₃/NH₃","Br₂/H₂O","NaOH"],a:0},
-{q:"Cellulose có thể tan trong",o:["nước Schweizer","nước bromine","dung dịch Tollens","ethanol"],a:0}
-],
-[
-{q:"Saccharose thủy phân tạo",o:["glucose và fructose","hai glucose","glucose và ethanol","fructose và ethanol"],a:0},
-{q:"Maltose thủy phân hoàn toàn tạo",o:["glucose","fructose","glucose và fructose","ethanol"],a:0},
-{q:"Tinh bột thủy phân hoàn toàn tạo",o:["glucose","fructose","saccharose","ethanol"],a:0},
-{q:"Cellulose thủy phân hoàn toàn tạo",o:["glucose","fructose","saccharose","maltose"],a:0}
-],
-[
-{q:"Glucose lên men tạo",o:["ethanol và CO₂","methanol và CO₂","acetic acid và H₂","glycerol và CO₂"],a:0},
-{q:"Phương trình lên men glucose tạo ethanol là",o:["C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂","C₆H₁₂O₆ → 2CH₃OH + 2CO₂","C₆H₁₂O₆ → C₂H₅OH + CO₂","C₆H₁₂O₆ → 6CO₂ + 6H₂"],a:0},
-{q:"Phương trình lên men glucose tạo lactic acid là",o:["C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂","C₆H₁₂O₆ → 2CH₃OH + 2CO₂","C₆H₁₂O₆ → 2CH₃CH(OH)COOH","C₆H₁₂O₆ → CH₃CH(OH)COOH"],a:2}
-],
-[
-{q:"Xà phòng hóa hoàn toàn 0,10 mol ethyl acetate bằng NaOH vừa đủ. Khối lượng sodium acetate thu được là bao nhiêu?",o:["8,2 g","4,1 g","16,4 g","12,3 g"],a:0},
-{q:"Xà phòng hóa hoàn toàn 0,20 mol ethyl acetate bằng NaOH vừa đủ. Khối lượng sodium acetate thu được là bao nhiêu?",o:["16,4 g","8,2 g","4,1 g","12,3 g"],a:0},
-{q:"Xà phòng hóa hoàn toàn 0,15 mol ethyl acetate bằng NaOH vừa đủ. Khối lượng sodium acetate thu được là bao nhiêu?",o:["12,3 g","8,2 g","16,4 g","6,15 g"],a:0},
-{q:"Xà phòng hóa hoàn toàn 0,05 mol ethyl acetate bằng NaOH vừa đủ. Khối lượng sodium acetate thu được là bao nhiêu?",o:["4,1 g","8,2 g","12,3 g","16,4 g"],a:0}
-],
-[
-{q:"Đun nóng dung dịch chứa 9 gam glucose với AgNO₃ dư trong ammonia. Khối lượng bạc thu được là",o:["5,4 g","10,8 g","21,6 g","2,7 g"],a:1},
-{q:"Đun nóng dung dịch chứa 18 gam glucose với AgNO₃ dư trong ammonia. Khối lượng bạc thu được là",o:["10,8 g","21,6 g","32,4 g","5,4 g"],a:1},
-{q:"Đun nóng dung dịch chứa 27 gam glucose với AgNO₃ dư trong ammonia. Khối lượng bạc thu được là",o:["16,2 g","32,4 g","10,8 g","21,6 g"],a:1},
-{q:"Đun nóng dung dịch chứa 36 gam glucose với AgNO₃ dư trong ammonia. Khối lượng bạc thu được là",o:["21,6 g","43,2 g","32,4 g","10,8 g"],a:1},
-{q:"Đun nóng dung dịch chứa 45 gam glucose với AgNO₃ dư trong ammonia. Khối lượng bạc thu được là",o:["27 g","54 g","21,6 g","43,2 g"],a:1}
-]
-];
+// DÁN URL Web App của Google Apps Script vào dòng dưới sau khi triển khai.
+const GOOGLE_SCRIPT_URL = "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 
-const tfGroups = [
-[
-{q:"Xét các nhận định về ester và chất béo:",s:[["Ethyl formate có công thức HCOOC₂H₅.",true],["Chất béo là triester của glycerol với acid béo.",true],["Xà phòng hóa chất béo bằng NaOH tạo acid béo tự do.",false],["Thủy phân ester trong môi trường acid thường là phản ứng thuận nghịch.",true]]},
-{q:"Xét các nhận định về ester:",s:[["Ester đơn chức, mạch hở có công thức cấu tạo chung RCOOR′.",true],["Phản ứng ester hóa thường cần xúc tác acid và đun nóng.",true],["Thủy phân ester trong môi trường kiềm luôn thu được acid tự do và alcohol.",false],["Ester C₃H₆O₂ chỉ có một đồng phân ester.",false]]},
-{q:"Xét các nhận định về tính chất hóa học của ester:",s:[["Ethyl acetate có công thức CH₃COOC₂H₅.",true],["Thủy phân methyl formate trong acid thu được methanol và acetic acid.",false],["Thủy phân ester trong môi trường kiềm thường là phản ứng một chiều.",true],["Phản ứng ester hóa giữa acid và alcohol luôn xảy ra hoàn toàn.",false]]},
-{q:"Xét các nhận định về ester và ứng dụng:",s:[["Một số ester có mùi trái cây và dùng trong công nghiệp hương liệu.",true],["Ethyl acetate có công thức phân tử C₄H₈O₂.",true],["Tất cả ester đều có mùi thơm dễ chịu.",false],["Thủy phân ethyl acetate trong NaOH thu được sodium formate và ethanol.",false]]}
-],
-[
-{q:"Xét các chất C₁₅H₃₁COONa; CH₃(CH₂)₁₁OSO₃Na; CH₃(CH₂)₁₁C₆H₄SO₃Na; C₁₇H₃₃COOK:",s:[["C₁₅H₃₁COONa là xà phòng.",true],["CH₃(CH₂)₁₁OSO₃Na là xà phòng theo định nghĩa của SGK.",false],["CH₃(CH₂)₁₁C₆H₄SO₃Na là chất giặt rửa tổng hợp.",true],["C₁₇H₃₃COOK là xà phòng.",true]]},
-{q:"Về phản ứng của chất béo:",s:[["Chất béo chứa gốc acid béo không no có thể tham gia hydrogen hóa.",true],["Oxygen không khí có thể làm chất béo bị oxi hóa.",true],["Xà phòng hóa là phản ứng trùng hợp.",false],["Sản phẩm xà phòng hóa chất béo có glycerol.",true]]},
-{q:"Xét các nhận định về xà phòng và chất giặt rửa tổng hợp:",s:[["Xà phòng thường là muối sodium hoặc potassium của acid béo.",true],["Chất giặt rửa tổng hợp luôn tạo kết tủa với Ca²⁺ trong nước cứng.",false],["Xà phòng có thể giảm tác dụng giặt rửa trong nước cứng.",true],["Chất giặt rửa tổng hợp không làm giảm sức căng bề mặt nước.",false]]},
-{q:"Xét các nhận định về phản ứng của chất béo:",s:[["Chất béo có gốc acid béo không no có thể cộng hydrogen vào liên kết C=C.",true],["Thủy phân chất béo trong môi trường kiềm gọi là xà phòng hóa.",true],["Xà phòng hóa chất béo chỉ tạo glycerol và nước.",false],["Chất béo không no không thể bị oxygen trong không khí oxi hóa.",false]]}
-],
-[
-{q:"Về glucose:",s:[["Glucose có công thức C₆H₁₂O₆.",true],["Glucose tạo bạc với thuốc thử Tollens.",true],["Glucose làm mất màu nước bromine.",true],["Glucose không phản ứng với Cu(OH)₂/NaOH.",false]]},
-{q:"Về fructose:",s:[["Fructose có công thức C₆H₁₂O₆.",true],["Fructose thuộc monosaccharide.",true],["Fructose có thể chuyển hóa qua lại với glucose trong môi trường kiềm.",true],["Fructose luôn làm mất màu nước bromine giống glucose trong mọi điều kiện.",false]]},
-{q:"Về saccharose và maltose:",s:[["Saccharose là disaccharide.",true],["Maltose là disaccharide.",true],["Saccharose thủy phân tạo glucose và fructose.",true],["Maltose thủy phân hoàn toàn tạo fructose.",false]]},
-{q:"Về tinh bột:",s:[["Tinh bột là polysaccharide.",true],["Tinh bột gồm amylose và amylopectin.",true],["Tinh bột cho màu xanh tím với iodine.",true],["Tinh bột thủy phân hoàn toàn tạo fructose.",false]]},
-{q:"Về cellulose:",s:[["Cellulose là polysaccharide.",true],["Cellulose có liên kết β-1,4-glycoside.",true],["Cellulose thủy phân hoàn toàn tạo glucose.",true],["Cellulose có thể tan trong nước Schweizer.",true]]},
-{q:"Nhận biết carbohydrate:",s:[["Nước chuối chín có thể cho phản ứng tráng bạc.",true],["Nhai kĩ cơm có thể thấy vị ngọt do tinh bột bị chuyển hóa.",true],["Nhỏ iodine vào tinh bột xuất hiện màu xanh tím.",true],["Saccharose cho phản ứng tráng bạc.",false]]}
-],
-[
-{q:"Xét phản ứng xà phòng hóa tripalmitin bằng NaOH:",s:[["Phản ứng tạo sodium palmitate và glycerol.",true],["1 mol tripalmitin cần 3 mol NaOH.",true],["Xà phòng hóa 8,06 g tripalmitin cần 0,03 mol NaOH.",true],["Sản phẩm xà phòng hóa không có glycerol.",false]]},
-{q:"Xét phản ứng xà phòng hóa tristearin bằng NaOH:",s:[["Phản ứng tạo sodium stearate và glycerol.",true],["1 mol tristearin phản ứng với 1 mol NaOH.",false],["Xà phòng hóa hoàn toàn tristearin bằng NaOH tạo stearic acid tự do.",false],["Sản phẩm có glycerol.",true]]},
-{q:"Xét phản ứng xà phòng hóa triolein bằng NaOH:",s:[["Phản ứng tạo sodium oleate và glycerol.",true],["Triolein là chất béo no.",false],["Triolein có thể tham gia phản ứng cộng hydrogen.",true],["Xà phòng hóa 1 mol triolein cần 3 mol NaOH.",true]]},
-{q:"Xét phản ứng xà phòng hóa trilinolein bằng NaOH:",s:[["Phản ứng tạo sodium linoleate và glycerol.",true],["Trilinolein không chứa liên kết đôi C=C.",false],["Xà phòng hóa 1 mol trilinolein cần 3 mol NaOH.",true],["Sản phẩm muối là sodium stearate.",false]]}
-]
-];
-
-const shortGroups = [
-[
-{q:"Khối lượng phân tử của tristearin là bao nhiêu? Nhập 4 chữ số, thêm số 0 ở đầu nếu cần.",a:"0890"},
-{q:"Khối lượng phân tử của tripalmitin là bao nhiêu? Nhập 4 chữ số.",a:"0806"},
-{q:"Khối lượng phân tử của triolein là bao nhiêu? Nhập 4 chữ số.",a:"0884"},
-{q:"Khối lượng phân tử của trilinolein là bao nhiêu? Nhập 4 chữ số.",a:"0878"},
-{q:"Khối lượng phân tử của glycerol là bao nhiêu? Nhập 4 chữ số.",a:"0092"}
-],
-[
-{q:"Thủy phân 0,25 mol CH₃COOC₂H₅ trong môi trường acid, hiệu suất 80%. Khối lượng ethanol thu được (g), viết 4 chữ số, bỏ dấu phẩy.",a:"0920"},
-{q:"Thủy phân 0,20 mol CH₃COOCH₃ trong môi trường acid, hiệu suất 75%. Khối lượng methanol thu được (g), viết 4 chữ số, bỏ dấu phẩy.",a:"0480"},
-{q:"Thủy phân 0,30 mol HCOOC₂H₅ trong môi trường acid, hiệu suất 60%. Khối lượng ethanol thu được (g), viết 4 chữ số, bỏ dấu phẩy.",a:"0828"},
-{q:"Thủy phân 0,15 mol CH₃CH₂COOCH₃ trong môi trường acid, hiệu suất 80%. Khối lượng methanol thu được (g), viết 4 chữ số, bỏ dấu phẩy.",a:"0384"},
-{q:"Thủy phân 0,25 mol CH₃COOC₃H₇ trong môi trường acid, hiệu suất 40%. Khối lượng propanol thu được (g), viết 4 chữ số, bỏ dấu phẩy.",a:"0600"}
-],
-[
-{q:"Xà phòng hóa hoàn toàn 0,08 mol tristearin bằng NaOH vừa đủ. Khối lượng sodium stearate thu được (g), làm tròn 2 chữ số thập phân, nhập 4 chữ số bỏ dấu phẩy.",a:"7344"},
-{q:"Xà phòng hóa hoàn toàn 0,05 mol tripalmitin bằng NaOH vừa đủ. Khối lượng sodium palmitate thu được (g), nhập 4 chữ số bỏ dấu phẩy.",a:"4170"},
-{q:"Xà phòng hóa hoàn toàn 0,06 mol triolein bằng NaOH vừa đủ. Khối lượng sodium oleate thu được (g), nhập 4 chữ số bỏ dấu phẩy.",a:"5472"},
-{q:"Xà phòng hóa hoàn toàn 0,04 mol trilinolein bằng NaOH vừa đủ. Khối lượng sodium linoleate thu được (g), nhập 4 chữ số bỏ dấu phẩy.",a:"3624"},
-{q:"Xà phòng hóa hoàn toàn 0,04 mol tristearin bằng NaOH vừa đủ. Khối lượng sodium stearate thu được (g), nhập 4 chữ số bỏ dấu phẩy.",a:"3672"}
-],
-[
-{q:"Điều chế aspirin từ phenol: 50 lọ × 100 viên, mỗi viên 100 mg aspirin, hiệu suất 80%. Khối lượng phenol cần dùng (g), làm tròn đến hàng đơn vị và nhập 4 chữ số.",a:"0326"},
-{q:"Điều chế aspirin từ phenol: 80 lọ × 100 viên, mỗi viên 75 mg aspirin, hiệu suất 75%. Khối lượng phenol cần dùng (g), làm tròn đến hàng đơn vị và nhập 4 chữ số.",a:"0418"},
-{q:"Điều chế aspirin từ phenol: 60 lọ × 100 viên, mỗi viên 100 mg aspirin, hiệu suất 60%. Khối lượng phenol cần dùng (g), làm tròn đến hàng đơn vị và nhập 4 chữ số.",a:"0522"},
-{q:"Điều chế aspirin từ phenol: 120 lọ × 100 viên, mỗi viên 50 mg aspirin, hiệu suất 70%. Khối lượng phenol cần dùng (g), làm tròn đến hàng đơn vị và nhập 4 chữ số.",a:"0448"}
-],
-[
-{q:"Tráng bạc lên gương 50 cm × 150 cm, lượng bạc 0,72 g/m². Từ 1,50 kg đường kính có 81% saccharose, hiệu suất 90%, phủ được tối đa bao nhiêu tấm gương? Nhập 4 chữ số.",a:"2557"},
-{q:"Cùng kích thước và lượng bạc mỗi m². Từ 2,50 kg đường kính có 81% saccharose, hiệu suất 85%, phủ được tối đa bao nhiêu tấm gương? Nhập 4 chữ số.",a:"4026"},
-{q:"Cùng kích thước và lượng bạc mỗi m². Từ 3,00 kg đường kính có 81% saccharose, hiệu suất 80%, phủ được tối đa bao nhiêu tấm gương? Nhập 4 chữ số.",a:"4547"},
-{q:"Cùng kích thước và lượng bạc mỗi m². Từ 4,00 kg đường kính có 81% saccharose, hiệu suất 75%, phủ được tối đa bao nhiêu tấm gương? Nhập 4 chữ số.",a:"5684"}
-],
-[
-{q:"Xà phòng hóa 0,12 mol triglyceride cần tối thiểu bao nhiêu mol NaOH? Viết số mol với 3 chữ số thập phân, bỏ dấu phẩy và thêm 0 đầu nếu cần.",a:"0360"},
-{q:"Đốt cháy hoàn toàn 0,20 mol ester C₄H₈O₂. Số mol CO₂ thu được là bao nhiêu? Viết 4 chữ số, bỏ dấu phẩy.",a:"0800"},
-{q:"Một mol tristearin phản ứng vừa đủ với bao nhiêu mol NaOH? Viết 4 chữ số, bỏ dấu phẩy.",a:"3000"},
-{q:"Ester HCOOC₂H₅ có bao nhiêu nguyên tử carbon trong một phân tử? Nhập 4 chữ số.",a:"0003"},
-{q:"Thủy phân hoàn toàn 0,15 mol saccharose. Số mol fructose thu được là bao nhiêu? Viết 4 chữ số, bỏ dấu phẩy.",a:"0150"},
-{q:"Thủy phân hoàn toàn 0,30 mol maltose. Số mol glucose thu được là bao nhiêu? Viết 4 chữ số, bỏ dấu phẩy.",a:"0600"},
-{q:"Lên men hoàn toàn 0,40 mol glucose. Số mol ethanol lý thuyết thu được là bao nhiêu? Viết 4 chữ số, bỏ dấu phẩy.",a:"0800"},
-{q:"Lên men 0,25 mol glucose với hiệu suất 80%. Số mol ethanol thực tế thu được là bao nhiêu? Viết 4 chữ số, bỏ dấu phẩy.",a:"0400"}
-]
-];
-
-let exam=[], answers={}, student={name:"",klass:""}, exits=0, submitted=false, seconds=2400, timerId=null, exitGuard=0;
+const BANK = {"mcGroups":[[{"q":"Tên gọi của ester HCOOC₂H₅ là","o":["methyl formate","ethyl formate","methyl acetate","ethyl acetate"],"a":1},{"q":"Tên gọi của ester CH₃COOCH₃ là","o":["methyl acetate","ethyl acetate","methyl formate","ethyl formate"],"a":0},{"q":"Tên gọi của CH₃CH₂COOCH₃ là","o":["ethyl propanoate","methyl propanoate","methyl acetate","propyl formate"],"a":1},{"q":"Tên gọi của CH₃COOC2H5 là","o":["ethyl propanoate","methyl propanoate","ethyl acetate","propyl formate"],"a":2}],[{"q":"Ester isoamyl acetate có mùi chuối chín, công thức phân tử của ester này là","o":["C₇H₁₄O₂","C₅H₁₀O₂","C₈H₁₆O₂","C₆H₁₂O₂"],"a":0},{"q":"Ester ethyl butyrate có mùi trái cây, thường được liên hệ với mùi dứa, công thức phân tử của ester này là","o":["C₇H₁₄O₂","C₅H₁₀O₂","C₈H₁₆O₂","C₆H₁₂O₂"],"a":3},{"q":"Ester methyl butanoate có mùi trái cây, công thức phân tử của ester này là","o":["C₄H₈O₂","C₅H₁₀O₂","C₆H₁₂O₂","C₇H₁₄O₂"],"a":1},{"q":"Ester ethyl acetate có mùi trái cây nhẹ, công thức phân tử của ester này là","o":["C₃H₆O₂","C₅H₁₀O₂","C₄H₈O₂","C₆H₁₂O₂"],"a":2},{"q":"Ester benzyl acetate có mùi hoa nhài, công thức phân tử của ester này là","o":["C₉H₁₀O₂","C₈H₈O₂","C₁₀H₁₂O₂","C₉H₁₂O₂"],"a":0}],[{"q":"Số đồng phân ester có công thức phân tử C₃H₆O₂ là","o":["1","2","3","4"],"a":1},{"q":"Số đồng phân ester có công thức phân tử C₅H₁₀O₂, khi thủy phân trong môi trường NaOH thu được sodium formate (HCOONa), là","o":["2","3","4","5"],"a":2},{"q":"Số đồng phân ester có công thức phân tử C₅H₁₀O₂, khi thủy phân trong môi trường NaOH thu được sodium acetate (CH₃COONa), là","o":["1","2","3","4"],"a":1},{"q":"Số đồng phân ester có công thức phân tử C2H4O2 là","o":["1","2","3","4"],"a":0},{"q":"Số đồng phân ester có công thức phân tử C4H8O2 là","o":["1","2","3","4"],"a":3},{"q":"số đồng phân ester C4H8O2 khi thủy phân trong môi trường NaOH thu được sodium formate","o":["1","2","3","4"],"a":1}],[{"q":"Phản ứng nào sau đây xảy ra thuận nghịch?","o":["Thủy phân ethyl acetate trong NaOH","Thủy phân ethyl acetate trong acid","Xà phòng hóa chất béo bằng NaOH","Hydrogen hóa chất béo có gốc không no"],"a":1},{"q":"Phản ứng nào sau đây được xem là một chiều trong các phản ứng đã học?","o":["Thủy phân ester trong acid","Điều chế ester từ acid và alcohol","Xà phòng hóa ester trong NaOH","Cả A và B"],"a":2},{"q":"Chất béo là","o":["muối của acid béo","triester của glycerol với acid béo","ester đơn chức của alcohol","hỗn hợp carbohydrate"],"a":1},{"q":"Xà phòng là muối của sodium hoặc potassium với","o":["acid béo","acetic acid","benzoic acid","phenol"],"a":0}],[{"q":"Chất béo (C₁₅H₃₁COO)₃C₃H₅ có tên là","o":["tripalmitin","tristearin","triolein","trilinolein"],"a":0},{"q":"Chất béo (C₁₇H₃₅COO)₃C₃H₅ có tên là","o":["tripalmitin","tristearin","triolein","trilinolein"],"a":1},{"q":"Chất béo (C₁₇H₃₃COO)₃C₃H₅ có tên là","o":["tripalmitin","tristearin","triolein","trilinolein"],"a":2},{"q":"Chất béo (C₁₇H31COO)₃C₃H₅ có tên là","o":["tripalmitin","tristearin","triolein","trilinolein"],"a":3}],[{"q":"Xà phòng hóa tripalmitin bằng NaOH tạo ra","o":["glycerol và palmitic acid","glycerol và sodium palmitate","ethanol và sodium palmitate","glycerol và sodium stearate"],"a":1},{"q":"Xà phòng hóa tristearin bằng KOH tạo ra","o":["glycerol và potassium stearate","glycerol và stearic acid","ethanol và potassium stearate","glycerol và potassium palmitate"],"a":0},{"q":"Xà phòng hóa triolein bằng NaOH tạo ra","o":["glycerol và oleic acid","glycerol và sodium oleate","ethanol và sodium oleate","glycerol và sodiam oleate"],"a":1},{"q":"Xà phòng hóa trilinolein bằng NaOH tạo ra","o":["glycerol và linoleic acid","glycerol và sodium linoleate","ethanol và sodium linoleate","glycerol và sodiam linoleate"],"a":1}],[{"q":"Công thức nào là xà phòng?","o":["C₁₅H₃₁COONa","CH₃(CH₂)₁₁OSO₃Na","CH₃(CH₂)₁₁C₆H₄SO₃Na","CH₃COONa"],"a":0},{"q":"Công thức nào là chất giặt rửa tổng hợp?","o":["C₁₇H₃₅COONa","C₁₅H₃₁COOK","CH₃(CH₂)₁₁C₆H₄SO₃Na","C₁₇H₃₃COONa"],"a":2},{"q":"Cặp chất đều là xà phòng là","o":["C₁₅H₃₁COONa và C₁₇H₃₃COOK","C₁₅H₃₁COONa và CH₃(CH₂)₁₁OSO₃Na","CH₃(CH₂)₁₁OSO₃Na và CH₃(CH₂)₁₁C₆H₄SO₃Na","CH₃COONa và C₁₅H₃₁COONa"],"a":0}],[{"q":"Phản ứng điều chế ethyl acetate là","o":["CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O","CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + H2","CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + NaOH","HCOOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O"],"a":0},{"q":"Phản ứng điều chế methyl acetate là","o":["CH₃COOH + CH₃OH ⇌ CH₃COOCH₃ + H₂O","CH₃COOH + CH₃OH → CH₃COOCH₃ + H₂","HCOOH + CH₃OH ⇌ CH₃COOCH₃ + H₂O","CH₃COOH + CH₃OH → CH₃COOCH₃ + NaOH"],"a":0},{"q":"Phản ứng điều chế ethyl butyrate (ethyl butanoate) là","o":["CH₃CH₂CH₂COOH + C₂H₅OH ⇌ CH₃CH₂CH₂COOC₂H₅ + H₂O","CH₃COOH + C₂H₅OH ⇌ CH₃CH₂CH₂COOC₂H₅ + H₂O","CH₃CH₂CH₂COOH + C₂H₅OH → CH₃CH₂CH₂COOC₂H₅ + H₂","HCOOH + C₂H₅OH ⇌ CH₃CH₂CH₂COOC₂H₅ + H₂O"],"a":0},{"q":"Phản ứng điều chế propyl acetate là","o":["CH₃COOH + CH₃OH ⇌ CH₃COOC₃H₇ + H₂O","CH₃COOH + C₃H₇OH ⇌ CH₃COOC₃H₇ + H₂O","C₂H₅COOH + C₃H₇OH ⇌ CH₃COOC₃H₇ + H₂O","CH₃COOH + C₃H₇OH → CH₃COOC₃H₇ + H₂"],"a":1},{"q":"Phản ứng điều chế ethyl methanoate (ethyl formate) là","o":["CH₃COOH + C₂H₅OH ⇌ HCOOC₂H₅ + H₂O","HCOOH + CH₃OH ⇌ HCOOC₂H₅ + H₂O","HCOOH + C₂H₅OH ⇌ HCOOC₂H₅ + H₂O","HCOOH + C₂H₅OH → HCOOC₂H₅ + H₂"],"a":2}],[{"q":"Acid béo CH₃(CH₂)₄CH=CHCH₂CH=CH(CH₂)₇COOH thuộc","o":["omega-3","omega-6","omega-7","omega-9"],"a":1},{"q":"Acid béo có liên kết đôi đầu tiên ở carbon số 9 tính từ đầu methyl thuộc","o":["omega-3","omega-6","omega-9","omega-12"],"a":2},{"q":"Acid béo CH₃(CH₂)₇CH=CH(CH₂)₇COOH thuộc nhóm","o":["omega-3","omega-6","omega-7","omega-9"],"a":3},{"q":"Acid béo có liên kết đôi đầu tiên ở carbon số 6 tính từ đầu methyl thuộc nhóm","o":["omega-3","omega-6","omega-9","omega-12"],"a":1}],[{"q":"Stearic acid có công thức là","o":["C₁₇H₃₃COOH","C₁₇H₃₅COOH","C₁₇H₃₁COOH","C₁₅H₂₉COOH"],"a":1},{"q":"Palmitic acid có công thức là","o":["C₁₇H₃₅COOH","C₁₅H₃₁COOH","C₁₇H₃₃COOH","C₁₅H₂₉COOH"],"a":1},{"q":"Oleic acid có công thức là","o":["C₁₇H₃₅COOH","C₁₇H₃₃COOH","C₁₇H₃₁COOH","C₁₅H₃₁COOH"],"a":1},{"q":"Linoleic acid có công thức là","o":["C₁₇H₃₅COOH","C₁₇H₃₃COOH","C₁₇H₃₁COOH","C₁₅H₃₁COOH"],"a":2}],[{"q":"chất béo nào sau đây là chất béo rắn","o":["triolein","tristearin","trilinolein","triacetate"],"a":1},{"q":"Chất béo nào sau đây thường ở trạng thái lỏng ở điều kiện thường?","o":["Tristearin","Tripalmitin","Triolein","Tricellulose"],"a":2},{"q":"Chất béo nào sau đây thường ở trạng thái rắn ở điều kiện thường?","o":["Triolein","Trilinolein","Trilinolenin","Tripalmitin"],"a":3},{"q":"Chất béo nào sau đây thường ở trạng thái lỏng ở điều kiện thường?","o":["Tristearin","Tripalmitin","Trilinolein","Tristearin"],"a":2}],[{"q":"Glucose và fructose thuộc nhóm","o":["monosaccharide","disaccharide","polysaccharide","ester"],"a":0},{"q":"Saccharose và maltose thuộc nhóm","o":["monosaccharide","disaccharide","polysaccharide","lipid"],"a":1},{"q":"Tinh bột và cellulose thuộc nhóm","o":["monosaccharide","disaccharide","polysaccharide","ester"],"a":2}],[{"q":"Carbohydrate thường có công thức gần đúng là","o":["Cn(H₂O)n","CnH2n","CnHn","Cn(HO)n"],"a":0},{"q":"Công thức phân tử của glucose là","o":["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)n","C₅H₁₀O₅"],"a":0},{"q":"Công thức phân tử của fructose là","o":["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)n","C₅H₁₀O₅"],"a":0},{"q":"Công thức phân tử của saccharose là","o":["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)n","C₂H₅OH"],"a":1},{"q":"Công thức phân tử của tinh bột là","o":["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)n","C₂H₅OH"],"a":2},{"q":"Công thức phân tử của maltose là","o":["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)n","C₂H₅OH"],"a":1},{"q":"Công thức phân tử của cellulose là","o":["C₆H₁₂O₆","C₁₂H₂₂O₁₁","(C₆H₁₀O₅)n","C₂H₅OH"],"a":2}],[{"q":"Đơn vị cấu tạo nên tinh bột là","o":["glucose","fructose","saccharose","ethanol"],"a":0},{"q":"Cellulose có liên kết glycoside đặc trưng là","o":["α-1,4","α-1,6","β-1,4","α-1,2"],"a":2},{"q":"Trong amylopectin có","o":["chỉ liên kết α-1,4","liên kết α-1,4 và α-1,6","chỉ liên kết β-1,4","liên kết α-1,2"],"a":1},{"q":"Saccharose được tạo bởi","o":["glucose và fructose","glucose và glucose","fructose và fructose","glucose và cellulose"],"a":0},{"q":"Maltose được tạo bởi","o":["glucose và fructose","hai đơn vị glucose","fructose và fructose","glucose và saccharose"],"a":1},{"q":"Chất thuộc polysaccharide là","o":["glucose","fructose","cellulose","saccharose"],"a":2},{"q":"Glucose phản ứng với Cu(OH)₂/NaOH tạo","o":["dung dịch xanh lam","kết tủa đỏ gạch ngay","màu xanh tím","không phản ứng"],"a":0},{"q":"Glucose phản ứng với thuốc thử Tollens tạo","o":["kết tủa bạc","màu xanh tím","không phản ứng","khí CO₂"],"a":0},{"q":"Glucose làm mất màu nước bromine vì","o":["có nhóm aldehyde ở dạng mạch hở","có nhóm ketone duy nhất","có liên kết peptide","có nhóm ester"],"a":0},{"q":"Hồ Tinh bột phản ứng với dung dịch iodine có màu","o":["dung dịch xanh lam","kết tủa đỏ gạch ngay","màu xanh tím","không phản ứng"],"a":2},{"q":"Saccharose với Cu(OH)₂/NaOH có hiện tượng","o":["tạo dung dịch xanh lam","tạo kết tủa bạc","mất màu bromine","tạo màu xanh tím với iodine"],"a":0},{"q":"Thuốc thử đặc trưng để nhận biết tinh bột là","o":["iodine","AgNO₃/NH₃","Br2/H₂O","NaOH"],"a":0},{"q":"Tinh bột với iodine tạo màu","o":["xanh tím","đỏ gạch","bạc","vàng"],"a":0},{"q":"Cellulose có thể tan trong","o":["nước Schweizer","nước bromine","dung dịch Tollens","ethanol"],"a":0},{"q":"Chất không phản ứng với Tollens theo bảng SGK là","o":["glucose","fructose","saccharose","cả glucose và fructose"],"a":2},{"q":"Chất phản ứng với Br2/H₂O theo bảng SGK là","o":["glucose","fructose","saccharose","tinh bột"],"a":0}],[{"q":"Saccharose thủy phân tạo","o":["glucose và fructose","hai glucose","glucose và ethanol","fructose và ethanol"],"a":0},{"q":"Maltose thủy phân hoàn toàn tạo","o":["glucose","fructose","glucose và fructose","ethanol"],"a":0},{"q":"Tinh bột thủy phân hoàn toàn tạo","o":["glucose","fructose","saccharose","ethanol"],"a":0},{"q":"Cellulose thủy phân hoàn toàn tạo","o":["glucose","fructose","saccharose","maltose"],"a":0}],[{"q":"Glucose lên men tạo","o":["ethanol và CO₂","methanol và CO₂","acetic acid và H2","glycerol và CO₂"],"a":0},{"q":"Phương trình lên men glucose tạo thành ethanol là","o":["C₆H₁₂O₆ → 2C2H5OH + 2CO2","C₆H₁₂O₆ → 2CH3OH + 2CO2","C₆H₁₂O₆ → C₂H₅OH + CO₂","C₆H₁₂O₆ → 6CO2 + 6H2"],"a":0},{"q":"Phương trình lên men glucose tạo thành lactic acid","o":["C₆H₁₂O₆ → 2C2H5OH + 2CO2","C₆H₁₂O₆ → 2CH3OH + 2CO2","C₆H₁₂O₆ → 2CH3CH(OH)COOH","C₆H₁₂O₆ → CH3CH(OH)COOH"],"a":2}],[{"q":"Xà phòng hóa hoàn toàn 0,1 mol ester ethyl acetate bằng dung dịch NaOH vừa đủ, thu được muối F và alcohol G. Khối lượng muối F (gam) thu được là","o":["8,2","4,1","16,4","12,3"],"a":0},{"q":"Xà phòng hóa hoàn toàn 0,2 mol ester ethyl acetate bằng dung dịch NaOH vừa đủ, thu được muối F và alcohol G. Khối lượng muối F (gam) thu được là","o":["8,2","4,1","16,4","12,3"],"a":2},{"q":"Xà phòng hóa hoàn toàn 0,15 mol ester ethyl acetate bằng dung dịch NaOH vừa đủ, thu được muối F và alcohol G. Khối lượng muối F (gam) thu được là","o":["8,2","4,1","16,4","12,3"],"a":3},{"q":"Xà phòng hóa hoàn toàn 0,05 mol ester ethyl acetate bằng dung dịch NaOH vừa đủ, thu được muối F và alcohol G. Khối lượng muối F (gam) thu được là","o":["8,2","4,1","16,4","12,3"],"a":1}],[{"q":"Đun nóng dung dịch chứa 9 gam glucose với dung dịch AgNO₃ (dư) trong ammonia, thấy có kim loại bạc tạo thành. Khối lượng bạc thu được là","o":["5,4 g","10,8 g","21,6 g","2,7 g"],"a":1},{"q":"Đun nóng dung dịch chứa 18 gam glucose với dung dịch AgNO₃ (dư) trong ammonia, thấy có kim loại bạc tạo thành. Khối lượng bạc thu được là","o":["10,8 g","21,6 g","32,4 g","5,4 g"],"a":1},{"q":"Đun nóng dung dịch chứa 27 gam glucose với dung dịch AgNO₃ (dư) trong ammonia, thấy có kim loại bạc tạo thành. Khối lượng bạc thu được là","o":["16,2 g","32,4 g","10,8 g","21,6 g"],"a":1},{"q":"Đun nóng dung dịch chứa 36 gam glucose với dung dịch AgNO₃ (dư) trong ammonia, thấy có kim loại bạc tạo thành. Khối lượng bạc thu được là","o":["21,6 g","43,2 g","32,4 g","10,8 g"],"a":1},{"q":"Đun nóng dung dịch chứa 45 gam glucose với dung dịch AgNO₃ (dư) trong ammonia, thấy có kim loại bạc tạo thành. Khối lượng bạc thu được là","o":["27 g","54 g","21,6 g","43,2 g D. cellulose thành saccharose III. DẠNG 2 – ĐÚNG/SAI (12 CÂU) Với mỗi câu, xác định từng ý a, b, c, d là Đúng hay Sai"],"a":1}]],"tfGroups":[[{"q":"Xét các nhận định về ester và chất béo:","s":[["Ethyl formate có công thức HCOOC₂H₅.",true],["Chất béo là triester của glycerol với acid béo.",true],["Xà phòng hóa chất béo bằng NaOH tạo acid béo tự do.",false],["Thủy phân ester trong môi trường acid thường là phản ứng thuận nghịch.",true]]},{"q":"Xét các nhận định về ester:","s":[["Ester đơn chức, mạch hở có công thức cấu tạo chung là RCOOR′.",true],["Phản ứng ester hóa giữa carboxylic acid và alcohol thường cần xúc tác acid và đun nóng.",true],["Thủy phân ester trong môi trường kiềm luôn thu được carboxylic acid và alcohol.",false],["Ester có công thức phân tử C₃H₆O₂ chỉ có một đồng phân ester.",false]]},{"q":"Xét các nhận định về tính chất hóa học của ester:","s":[["Ethyl acetate có công thức cấu tạo thu gọn là CH₃COOC₂H₅.",true],["Thủy phân methyl formate trong môi trường acid thu được methanol và acetic acid.",false],["Thủy phân ester trong môi trường kiềm thường là phản ứng một chiều.",true],["Phản ứng ester hóa giữa carboxylic acid và alcohol luôn xảy ra hoàn toàn.",false]]},{"q":"Xét các nhận định về ester và ứng dụng của ester:","s":[["Một số ester có mùi thơm của hoa quả và được sử dụng trong công nghiệp hương liệu.",true],["Ethyl acetate có công thức phân tử C₄H₈O₂.",true],["Tất cả các ester đều có mùi thơm dễ chịu.",false],["Thủy phân ethyl acetate trong môi trường NaOH thu được sodium formate và ethanol.",false]]}],[{"q":"Xét các chất C₁₅H₃₁COONa; CH₃(CH₂)₁₁OSO₃Na; CH₃(CH₂)₁₁C₆H₄SO₃Na; C₁₇H₃₃COOK:","s":[["C₁₅H₃₁COONa là xà phòng.",true],["CH₃(CH₂)₁₁OSO₃Na là xà phòng theo định nghĩa của SGK.",false],["CH₃(CH₂)₁₁C₆H₄SO₃Na là chất giặt rửa tổng hợp.",true],["C₁₇H₃₃COOK là xà phòng.",true]]},{"q":"Về phản ứng của chất béo:","s":[["Chất béo chứa gốc acid béo không no có thể tham gia hydrogen hóa.",true],["Oxygen không khí có thể làm chất béo bị oxi hóa.",true],["Xà phòng hóa là phản ứng trùng hợp.",false],["Sản phẩm xà phòng hóa chất béo có glycerol.",true]]},{"q":"Xét các chất C₁₇H₃₅COONa; CH₃(CH₂)₁₁OSO₃Na; CH₃(CH₂)₁₁C₆H₄SO₃Na; C₁₅H₃₁COOK:","s":[["C₁₇H₃₅COONa là thành phần chính của một số loại xà phòng.",true],["CH₃(CH₂)₁₁OSO₃Na là muối sodium của acid béo.",false],["CH₃(CH₂)₁₁C₆H₄SO₃Na là chất giặt rửa tổng hợp.",true],["C₁₅H₃₁COOK không có khả năng dùng làm xà phòng.",false]]},{"q":"Xét các nhận định về xà phòng và chất giặt rửa tổng hợp:","s":[["Xà phòng thường là muối sodium hoặc potassium của acid béo.",true],["Chất giặt rửa tổng hợp luôn tạo kết tủa với ion Ca²⁺ trong nước cứng.",false],["Xà phòng có thể bị giảm tác dụng giặt rửa trong nước cứng.",true],["Chất giặt rửa tổng hợp không có khả năng làm giảm sức căng bề mặt của nước.",false]]},{"q":"Xét các nhận định về phản ứng của chất béo:","s":[["Chất béo chứa gốc acid béo không no có thể tham gia phản ứng cộng hydrogen vào liên kết đôi C=C.",true],["Thủy phân chất béo trong môi trường kiềm được gọi là phản ứng xà phòng hóa.",true],["Phản ứng xà phòng hóa chất béo chỉ tạo glycerol và nước.",false],["Chất béo không no không thể bị oxi hóa bởi oxygen trong không khí.",false]]},{"q":"Xét các nhận định về tính chất và ứng dụng của chất béo:","s":[["Chất béo là triester của glycerol với các acid béo.",true],["Hydrogen hóa chất béo chứa nhiều gốc acid béo không no có thể làm tăng độ rắn của chất béo.",true],["Chất béo bị oxi hóa trong không khí luôn tạo ra glycerol và xà phòng.",false],["Khi xà phòng hóa hoàn toàn chất béo bằng NaOH, sản phẩm thu được gồm glycerol và muối sodium của acid béo.",true]]}],[{"q":"Nhận xét về glucose như sau:","s":[["Glucose có CTPT C₆H₁₂O₆.",true],["Glucose tạo kết tủa bạc với thuốc thử Tollens.",true],["Glucose làm mất màu nước bromine.",true],["Glucose không phản ứng với Cu(OH)₂/NaOH.",false]]},{"q":"Về fructose:","s":[["Fructose có CTPT C₆H₁₂O₆.",true],["Fructose thuộc monosaccharide.",true],["Fructose có thể chuyển hóa qua lại với glucose trong môi trường kiềm.",true],["Fructose luôn làm mất màu nước bromine giống glucose trong mọi điều kiện.",false]]},{"q":"Về saccharose và maltose:","s":[["Saccharose là disaccharide.",true],["Maltose là disaccharide.",true],["Saccharose thủy phân tạo glucose và fructose.",true],["Maltose thủy phân hoàn toàn tạo fructose.",false]]},{"q":"Về tinh bột:","s":[["Tinh bột là polysaccharide.",true],["Tinh bột gồm amylose và amylopectin.",true],["Tinh bột cho màu xanh tím với iodine.",true],["Tinh bột thủy phân hoàn toàn tạo fructose.",false]]},{"q":"Về cellulose:","s":[["Cellulose là polysaccharide.",true],["Cellulose có liên kết β-1,4-glycoside.",true],["Cellulose thủy phân hoàn toàn tạo glucose.",true],["Cellulose có thể tan trong nước Schweizer.",true]]},{"q":"Nhận biết carbohydrate:","s":[["Nước chuối chín có thể cho phản ứng tráng bạc.",true],["Nhai kĩ cơm có thể thấy vị ngọt do tinh bột bị chuyển hóa.",true],["Nhỏ iodine vào tinh bột xuất hiện màu xanh tím.",true],["Saccharose cho phản ứng tráng bạc.",false]]},{"q":"Về phân loại carbohydrate:","s":[["Glucose là monosaccharide.",true],["Saccharose là monosaccharide.",false],["Tinh bột là polysaccharide.",true],["Cellulose là polysaccharide.",true]]},{"q":"Về phản ứng thủy phân:","s":[["Saccharose thủy phân tạo glucose và fructose.",true],["Maltose thủy phân tạo glucose.",true],["Tinh bột thủy phân tạo glucose.",true],["Cellulose thủy phân tạo saccharose.",false]]},{"q":"Về lên men:","s":[["Glucose có thể lên men tạo ethanol và CO₂.",true],["Quá trình lên men là một hướng sản xuất ethanol.",true],["Tinh bột và cellulose có thể là nguyên liệu để sản xuất ethanol sau quá trình thích hợp.",true],["Phản ứng lên men glucose tạo methanol và CO₂.",false]]}],[{"q":"Xét phản ứng xà phòng hóa tripalmitin bằng dung dịch NaOH:","s":[["Phản ứng xảy ra thuận nghịch.",false],["Xà phòng hóa hoàn toàn 8,06 gam tripalmitin bằng NaOH dư, thu được 8,40 gam sodium palmitate (giả sử hiệu suất phản ứng 100%).",false],["Xà phòng hóa hoàn toàn 8,06 gam tripalmitin cần vừa đủ 0,03 mol NaOH.",true],["Sản phẩm xà phòng hóa tripalmitin không có glycerol.",false]]},{"q":"Xét phản ứng xà phòng hóa tristearin bằng dung dịch NaOH:","s":[["Phản ứng xảy ra thuận nghịch.",false],["Xà phòng hóa hoàn toàn 8,90 gam tristearin bằng NaOH dư, thu được 9,00 gam sodium stearate (giả sử hiệu suất phản ứng 100%).",false],["Xà phòng hóa hoàn toàn 8,90 gam tristearin cần vừa đủ 0,03 mol NaOH.",true],["Phản ứng xà phòng hóa tristearin tạo glycerol và stearic acid tự do.",false]]},{"q":"Xét phản ứng xà phòng hóa triolein bằng dung dịch NaOH:","s":[["Phản ứng xảy ra thuận nghịch.",false],["Xà phòng hóa hoàn toàn 8,84 gam triolein bằng NaOH dư, thu được 9,00 gam sodium oleate (giả sử hiệu suất phản ứng 100%).",false],["Xà phòng hóa hoàn toàn 8,84 gam triolein cần vừa đủ 0,03 mol NaOH.",true],["Triolein là chất béo no nên không thể tham gia phản ứng cộng hydrogen.",false]]},{"q":"Xét phản ứng xà phòng hóa trilinolein bằng dung dịch NaOH:","s":[["Phản ứng xảy ra thuận nghịch.",false],["Xà phòng hóa hoàn toàn 8,78 gam trilinolein bằng NaOH dư, thu được 9,20 gam sodium linoleate (giả sử hiệu suất phản ứng 100%).",false],["Xà phòng hóa hoàn toàn 8,78 gam trilinolein cần vừa đủ 0,03 mol NaOH.",true],["Trilinolein không chứa liên kết đôi C=C trong các gốc acid béo.",false]]}]],"shortGroups":[[{"q":"Khối lượng phân tử của tristearin là bao nhiêu?","a":"890"},{"q":"Khối lượng phân tử của tripalmitin là bao nhiêu?","a":"806"},{"q":"Khối lượng phân tử của triolein là bao nhiêu?","a":"884"},{"q":"Khối lượng phân tử của trilinolein là bao nhiêu?","a":"878"},{"q":"Khối lượng phân tử của glycerol là bao nhiêu?","a":"92"}],[{"q":"Thủy phân hoàn toàn 0,25 mol CH₃COOC₂H₅ trong môi trường acid với hiệu suất 80%, khối lượng ethanol thu được là bao nhiêu?","a":"9.2"},{"q":"Thủy phân hoàn toàn 0,20 mol CH₃COOCH₃ trong môi trường acid với hiệu suất 75%, khối lượng methanol thu được là bao nhiêu gam?","a":"4.8"},{"q":"Thủy phân hoàn toàn 0,30 mol HCOOC₂H₅ trong môi trường acid với hiệu suất 60%, khối lượng ethanol thu được là bao nhiêu gam?","a":"8.28"},{"q":"Thủy phân hoàn toàn 0,15 mol CH₃CH₂COOCH₃ trong môi trường acid với hiệu suất 80%, khối lượng methanol thu được là bao nhiêu gam?","a":"3.84"},{"q":"Thủy phân hoàn toàn 0,25 mol CH₃COOC₃H₇ trong môi trường acid với hiệu suất 40%, khối lượng propanol thu được là bao nhiêu gam?","a":"6"}],[{"q":"Xà phòng hóa hoàn toàn 0,08 mol tristearin trong dung dịch NaOH vừa đủ, khối lượng xà phòng thu được là bao nhiêu gam?","a":"73.44"},{"q":"Xà phòng hóa hoàn toàn 0,05 mol tripalmitin trong dung dịch NaOH vừa đủ, khối lượng xà phòng thu được là bao nhiêu gam?","a":"41.7"},{"q":"Xà phòng hóa hoàn toàn 0,06 mol triolein trong dung dịch NaOH vừa đủ, khối lượng xà phòng thu được là bao nhiêu gam?","a":"54.72"},{"q":"Xà phòng hóa hoàn toàn 0,04 mol trilinolein trong dung dịch NaOH vừa đủ, khối lượng xà phòng thu được là bao nhiêu gam?","a":"36.24"},{"q":"Xà phòng hóa hoàn toàn 0,12 mol tristearin trong dung dịch NaOH vừa đủ, khối lượng xà phòng thu được là bao nhiêu gam?","a":"110.16"}],[{"q":"Khối lượng phenol cần thiết để sản xuất 50 lọ aspirin, mỗi lọ có 100 viên (mỗi viên chứa 100mg aspirin), với hiệu suất cả quá trình là 80%, là bao nhiêu gam?","a":"326.4"},{"q":"Khối lượng phenol cần thiết để sản xuất 60 lọ aspirin, mỗi lọ có 100 viên (mỗi viên chứa 100mg aspirin), với hiệu suất cả quá trình là 82%, là bao nhiêu gam?","a":"382.1"},{"q":"Khối lượng phenol cần thiết để sản xuất 70 lọ aspirin, mỗi lọ có 100 viên (mỗi viên chứa 100mg aspirin), với hiệu suất cả quá trình là 84%, là bao nhiêu gam?","a":"435.2"},{"q":"Khối lượng phenol cần thiết để sản xuất 80 lọ aspirin, mỗi lọ có 100 viên (mỗi viên chứa 100mg aspirin), với hiệu suất cả quá trình là 85%, là bao nhiêu gam?","a":"491.5"}],[{"q":"Khối lượng Ag cần thiết để phủ 2000 tấm gương kích thước 50cm x 150 cm, biết 1m2 Ag phủ trên tấm gương nặng 0,72g. Hiệu suất phủ Ag 81%","a":"1333.33"},{"q":"Khối lượng Ag cần thiết để phủ 3000 tấm gương kích thước 50cm x 150 cm, biết 1m2 Ag phủ trên tấm gương nặng 0,72g. Hiệu suất phủ Ag 84%","a":"1928.57"},{"q":"Khối lượng Ag cần thiết để phủ 4000 tấm gương kích thước 50cm x 150 cm, biết 1m2 Ag phủ trên tấm gương nặng 0,72g. Hiệu suất phủ Ag 85%","a":"2541.18"},{"q":"Khối lượng Ag cần thiết để phủ 5000 tấm gương kích thước 50cm x 150 cm, biết 1m2 Ag phủ trên tấm gương nặng 0,72g. Hiệu suất phủ Ag 86%","a":"3139.53"}],[{"q":"Xà phòng hóa 0,12 mol triglyceride cần tối thiểu bao nhiêu mol NaOH?","a":"0.36"},{"q":"Đốt cháy hoàn toàn 0,20 mol ester C₄H₈O₂. Số mol CO₂ thu được là bao nhiêu?","a":"0.8"},{"q":"Một mol tristearin phản ứng vừa đủ với bao nhiêu mol NaOH?","a":"3"},{"q":"Ester HCOOC₂H₅ có bao nhiêu nguyên tử carbon trong một phân tử?","a":"2"},{"q":"Thủy phân 0,15 mol saccharose hoàn toàn. Số mol fructose thu được là bao nhiêu?","a":"0.15"},{"q":"Thủy phân hoàn toàn 0,30 mol maltose. Số mol glucose thu được là bao nhiêu?","a":"0.60"},{"q":"Lên men hoàn toàn 0,40 mol glucose. Số mol ethanol lý thuyết thu được là bao nhiêu?","a":"0.80"},{"q":"Lên men 0,25 mol glucose với hiệu suất 80%. Số mol ethanol thực tế thu được là bao nhiêu?","a":"0.40"}]]};
+// Mỗi lượt chọn ngẫu nhiên một câu từ từng nhóm 1–28; trộn thứ tự câu và vị trí đáp án.
+let mcqs=[],tfs=[],shorts=[];
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
+function numericValue(v){let s=String(v??'').trim().replace(/,/g,'.');const m=s.match(/[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?/i);return m?Number(m[0]):NaN}
+function isShortCorrect(raw,answer){const a=numericValue(raw),b=numericValue(answer);if(Number.isFinite(a)&&Number.isFinite(b))return Math.abs(a-b)<=Math.max(0.015,Math.abs(b)*0.001);return normalizeAnswer(raw)===normalizeAnswer(answer)}
+function prepareAttempt(){
+ // Chọn câu trong từng nhóm, trộn đáp án và cập nhật khóa đáp án tương ứng.
+ mcqs=BANK.mcGroups.map(g=>{const x=g[Math.floor(Math.random()*g.length)],pairs=x.o.map((o,i)=>({o,correct:i===x.a}));shuffle(pairs);return {q:x.q,o:pairs.map(p=>p.o),a:pairs.findIndex(p=>p.correct)}});shuffle(mcqs);
+ tfs=BANK.tfGroups.map(g=>({...g[Math.floor(Math.random()*g.length)]}));shuffle(tfs);
+ shorts=BANK.shortGroups.map(g=>({...g[Math.floor(Math.random()*g.length)]}));shuffle(shorts);
+}
+let remaining=2400,timerId=null,submitted=false,leaveCount=0,examStarted=false,submitting=false;
 const $=id=>document.getElementById(id);
-const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
-function startExam(){
- const name=$("studentName").value.trim(), klass=$("studentClass").value.trim();
- if(!name||!klass){alert("Em hãy nhập đầy đủ họ tên và lớp trước khi bắt đầu.");return}
- student={name,klass}; answers={}; exits=0; submitted=false; seconds=2400;
- exam=[];
- mcGroups.forEach((g,i)=>{const raw=shuffle(g)[0];const opts=raw.o.map((t,k)=>({t,ok:k===raw.a}));exam.push({type:"mc",group:i+1,q:raw.q,opts:shuffle(opts)})});
- tfGroups.forEach((g,i)=>{const raw=shuffle(g)[0];exam.push({type:"tf",group:i+19,q:raw.q,s:shuffle(raw.s.map((x,k)=>({t:x[0],ok:x[1],id:k})))})});
- shortGroups.forEach((g,i)=>{const raw=shuffle(g)[0];exam.push({type:"short",group:i+23,q:raw.q,a:raw.a})});
- // Trộn vị trí câu trong từng phần, nhưng giữ đúng cấu trúc 18 + 4 + 6.
- const part1=shuffle(exam.filter(x=>x.type==="mc")), part2=shuffle(exam.filter(x=>x.type==="tf")), part3=shuffle(exam.filter(x=>x.type==="short"));
- exam=[...part1,...part2,...part3];
- $("login").classList.add("hidden");$("exam").classList.remove("hidden");
- $("studentBadge").textContent=name+" · "+klass;
- renderExam();updateProgress();timerId=setInterval(tick,1000);
- document.addEventListener("visibilitychange",onVisibility);window.addEventListener("blur",onBlur);
- window.scrollTo(0,0);
+function buildExam(){
+ const mc=$("mcqContainer"),tf=$("tfContainer"),sh=$("shortContainer");
+ mc.innerHTML='<div class="panel"><h2>PHẦN I. TRẮC NGHIỆM 4 LỰA CHỌN (18 câu)</h2><p class="note">Mỗi câu chọn một đáp án.</p></div>';
+ mcqs.forEach((x,i)=>{const c=document.createElement("section");c.className="question";c.id=`question-${i+1}`;c.innerHTML=`<p class="qtitle">Câu ${i+1}. ${chemHtml(x.q)}</p><div class="options">${x.o.map((o,j)=>`<label class="option"><input type="radio" name="mc${i}" value="${j}"><span><b>${"ABCD"[j]}.</b> ${chemHtml(o)}</span></label>`).join("")}</div>`;mc.appendChild(c)});
+ tf.innerHTML='<div class="panel"><h2>PHẦN II. TRẮC NGHIỆM ĐÚNG / SAI (4 câu)</h2><p class="note">Mỗi ý a, b, c, d được chấm độc lập.</p></div>';
+ tfs.forEach((x,i)=>{const c=document.createElement("section");c.className="question";c.id=`question-${18+i+1}`;c.innerHTML=`<p class="qtitle">Câu ${i+19}. ${chemHtml(x.q)}</p>`+x.s.map((s,j)=>`<div class="substatement"><div class="tfline"><div><b>${"abcd"[j]})</b> ${chemHtml(s[0])}</div><div class="choices"><label><input type="radio" name="tf${i}_${j}" value="true"> Đúng</label><label><input type="radio" name="tf${i}_${j}" value="false"> Sai</label></div></div></div>`).join("");tf.appendChild(c)});
+ sh.innerHTML='<div class="panel"><h2>PHẦN III. TRẢ LỜI NGẮN (6 câu)</h2><p class="note">Nhập đáp án số; có thể ghi thêm đơn vị. Không giới hạn số ký tự.</p></div>';
+ shorts.forEach((x,i)=>{const c=document.createElement("section");c.className="question";c.id=`question-${22+i+1}`;c.innerHTML=`<label for="short${i}" class="qtitle">Câu ${i+23}. ${chemHtml(x.q)}</label><input class="shortinput" id="short${i}" type="text" inputmode="text" placeholder="Nhập đáp án" autocomplete="off">`;sh.appendChild(c)});
 }
-function renderExam(){
- const root=$("questions");root.innerHTML="";
- const sections=[["PHẦN I – TRẮC NGHIỆM 4 ĐÁP ÁN",exam.filter(x=>x.type==="mc")],["PHẦN II – TRẮC NGHIỆM ĐÚNG/SAI",exam.filter(x=>x.type==="tf")],["PHẦN III – TRẢ LỜI NGẮN (4 KÍ TỰ)",exam.filter(x=>x.type==="short")]];
- let n=0;
- sections.forEach(([heading,items])=>{
-  const h=document.createElement("h2");h.textContent=heading;root.appendChild(h);
-  items.forEach(item=>{n++;item.renderNo=n;const box=document.createElement("article");box.className="q";box.id="q"+n;
-   let content=`<h3><span class="qnum">Câu ${n} · Nhóm ${item.group}.</span> ${esc(item.q)}</h3>`;
-   if(item.type==="mc"){content+=item.opts.map((o,k)=>`<label class="opt"><input type="radio" name="q${n}" value="${k}"><span><b>${"ABCD"[k]}.</b> ${esc(o.t)}</span></label>`).join("")}
-   else if(item.type==="tf"){content+=item.s.map((s,k)=>`<div class="tfrow"><p><b>${"abcd"[k]})</b> ${esc(s.t)}</p><div class="tfchoices"><label><input type="radio" name="q${n}_${k}" value="true"> Đúng</label><label><input type="radio" name="q${n}_${k}" value="false"> Sai</label></div></div>`).join("")}
-   else content+=`<label class="small" for="short${n}">Nhập đúng 4 chữ số (không nhập đơn vị)</label><input id="short${n}" type="text" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="Ví dụ: 0048">`;
-   box.innerHTML=content;root.appendChild(box);
-  });
- });
- root.querySelectorAll("input").forEach(el=>el.addEventListener("change",updateProgress));
- root.querySelectorAll('input[type="text"]').forEach(el=>el.addEventListener("input",()=>{el.value=el.value.replace(/\\D/g,"").slice(0,4);updateProgress()}));
+function buildNavigator(){
+ const grid=$("navGrid");grid.innerHTML="";
+ for(let n=1;n<=28;n++){const b=document.createElement("button");b.type="button";b.className="qnavbtn";b.textContent=n;b.setAttribute("aria-label",`Đến câu ${n}`);b.addEventListener("click",()=>{const target=$(`question-${n}`);if(target){target.scrollIntoView({behavior:"smooth",block:"start"});document.querySelectorAll(".qnavbtn").forEach(x=>x.classList.remove("current"));b.classList.add("current")}});grid.appendChild(b)}
+ updateNavigator();
 }
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function updateProgress(){
- let count=0;
- exam.forEach(it=>{const n=it.renderNo;if(it.type==="mc"){if(document.querySelector(`input[name="q${n}"]:checked`))count++}
- else if(it.type==="tf"){if([0,1,2,3].every(k=>document.querySelector(`input[name="q${n}_${k}"]:checked`)))count++}
- else if(($("short"+n)?.value||"").length===4)count++});
- $("progressText").textContent=`Đã trả lời ${count}/28 câu`;
- $("progressBar").style.width=(count/28*100)+"%";
+function questionState(n){
+ if(n<=18)return document.querySelector(`input[name="mc${n-1}"]:checked`)?"answered":"unanswered";
+ if(n<=22){const i=n-19;const vals=[0,1,2,3].map(j=>document.querySelector(`input[name="tf${i}_${j}"]:checked`));return vals.every(Boolean)?"answered":vals.some(Boolean)?"partial":"unanswered"}
+ return $(`short${n-23}`).value.trim()?"answered":"unanswered";
 }
-function tick(){if(submitted)return;seconds--;const m=String(Math.floor(seconds/60)).padStart(2,"0"),s=String(seconds%60).padStart(2,"0");$("timer").textContent=m+":"+s;if(seconds<=0){finish("Hết thời gian làm bài");}}
-function onVisibility(){if(document.visibilityState==="hidden")registerExit()}
-function onBlur(){registerExit()}
-function registerExit(){
- if(submitted||Date.now()-exitGuard<1200)return;exitGuard=Date.now();exits++;$("exitCount").textContent=exits+"/3";
- if(exits>=3){finish("Tự động nộp vì rời màn hình 3 lần");}
+function updateNavigator(){
+ if(!$('navGrid'))return;let done=0;
+ [...$('navGrid').children].forEach((b,i)=>{const state=questionState(i+1);b.classList.toggle('answered',state==='answered');b.classList.toggle('partial',state==='partial');b.setAttribute('aria-label',`Câu ${i+1}: ${state==='answered'?'đã trả lời':state==='partial'?'đang trả lời một phần':'chưa trả lời'}`);if(state==='answered')done++});
+ $('navProgress').textContent=`Đã trả lời ${done}/28`;
 }
-function finish(reason){
- if(submitted)return;submitted=true;clearInterval(timerId);document.removeEventListener("visibilitychange",onVisibility);window.removeEventListener("blur",onBlur);
- let scoreMC=0,scoreTF=0,scoreShort=0,detail=[];
- exam.forEach(it=>{
-  const n=it.renderNo;
-  if(it.type==="mc"){
-   const sel=document.querySelector(`input[name="q${n}"]:checked`),chosen=sel?Number(sel.value):-1,correct=it.opts.findIndex(o=>o.ok),ok=chosen===correct;
-   if(ok)scoreMC+=0.25;
-   detail.push({n,type:it.type,q:it.q,ok,chosen:chosen<0?"Chưa trả lời":it.opts[chosen].t,correct:it.opts[correct].t,points:ok?0.25:0});
-  }else if(it.type==="tf"){
-   let got=0,rows=[];
-   it.s.forEach((s,k)=>{const sel=document.querySelector(`input[name="q${n}_${k}"]:checked`),v=sel?sel.value:null,ok=(v==="true")===s.ok;if(ok)got+=0.25;rows.push({statement:s.t,chosen:v===null?"Chưa trả lời":v==="true"?"Đúng":"Sai",correct:s.ok?"Đúng":"Sai",ok})});
-   scoreTF+=got;detail.push({n,type:it.type,q:it.q,ok:got===1,points:got,rows});
-  }else{
-   const val=($("short"+n)?.value||"").trim(),ok=val===it.a;if(ok)scoreShort+=0.25;
-   detail.push({n,type:it.type,q:it.q,ok,chosen:val||"Chưa trả lời",correct:it.a,points:ok?0.25:0});
-  }
- });
- const total=Math.round((scoreMC+scoreTF+scoreShort)*100)/100;
- $("exam").classList.add("hidden");$("results").classList.remove("hidden");
- let out=`<h2>Kết quả kiểm tra</h2><p><b>Học sinh:</b> ${esc(student.name)} · <b>Lớp:</b> ${esc(student.klass)}</p><p><b>Lý do nộp:</b> ${esc(reason)}</p><div class="resultscore">${total.toFixed(2)}/10 điểm</div><p>Trắc nghiệm: <b>${scoreMC.toFixed(2)}/4.50</b> · Đúng/sai: <b>${scoreTF.toFixed(2)}/4.00</b> · Trả lời ngắn: <b>${scoreShort.toFixed(2)}/1.50</b></p><p class="small">Mỗi lựa chọn trắc nghiệm đúng được 0,25 điểm; mỗi ý đúng/sai đúng được 0,25 điểm; mỗi câu trả lời ngắn đúng được 0,25 điểm.</p><h3>Đối chiếu đáp án</h3>`;
- detail.forEach(d=>{
-  out+=`<div class="review ${d.ok?"correct":"incorrect"}"><b>Câu ${d.n}.</b> ${esc(d.q)}<br>`;
-  if(d.type==="tf"){out+=`<span class="resulttag">Điểm: ${d.points.toFixed(2)}/1,00</span><ol>`;d.rows.forEach(r=>{out+=`<li>${esc(r.statement)}<br>Em chọn: <b>${r.chosen}</b> · Đáp án: <b>${r.correct}</b> — ${r.ok?"Đúng (+0,25)":"Sai (+0)"}</li>`});out+="</ol>"}
-  else out+=`Em trả lời: <b>${esc(d.chosen)}</b><br>Đáp án: <b>${esc(d.correct)}</b><br><span class="resulttag">${d.ok?"Đúng (+0,25)":"Sai (+0)"}</span>`;
-  out+="</div>";
- });
- out+=`<div class="notice">Kết quả hiện đang hiển thị trên thiết bị này. Để tự động gửi điểm về Google Sheets/email giáo viên, cần kết nối URL Google Apps Script trong phần cấu hình của file.</div><button onclick="location.reload()">Làm bài mới</button>`;
- $("results").innerHTML=out;window.scrollTo(0,0);
- // Optional Google Apps Script integration: paste deployed Web App URL into SHEETS_WEB_APP_URL below.
- if(SHEETS_WEB_APP_URL && SHEETS_WEB_APP_URL.startsWith("https://script.google.com/")){
-  const payload={name:student.name,klass:student.klass,score:total,scoreMC,scoreTF,scoreShort,reason,exits,submittedAt:new Date().toISOString(),details:detail};
-  fetch(SHEETS_WEB_APP_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}).catch(()=>{});
- }
+function start(){const n=$("studentName").value.trim(),cl=$("studentClass").value.trim();if(!n||!cl){$("loginError").classList.remove("hidden");return}
+ $("loginError").classList.add("hidden");prepareAttempt();buildExam();buildNavigator();$("studentBadge").textContent=`${n} · ${cl}`;$("login").classList.add("hidden");$("exam").classList.remove("hidden");examStarted=true;remaining=2400;updateTimer();
+ timerId=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){clearInterval(timerId);submitExam(true,"Hết giờ")}},1000);window.scrollTo({top:0,behavior:"smooth"});}
+function updateTimer(){const m=Math.floor(remaining/60),s=remaining%60;$("timer").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+function normalizeAnswer(v){return String(v||"").trim().replace(/\s/g,"").replace(".",",")}
+function escapeHtml(s){return String(s).replace(/[&<>"\']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "\'": "&#39;"}[c]))}
+function chemHtml(s){return escapeHtml(s).replace(/([A-Za-z)])(\d+)/g,"$1<sub>$2</sub>")}
+function watchLeave(){if(!examStarted||submitted||document.visibilityState!=="hidden")return;leaveCount++;$("leaveCount").textContent=`Số lần rời màn hình: ${leaveCount}/3`;if(leaveCount===1)$("warning").textContent="Lưu ý lần 1";else if(leaveCount===2)$("warning").textContent="Cảnh báo lần 2";if(leaveCount>=3){$("warning").textContent="Đã đạt 3 lần";submitExam(true,"Tự động nộp do rời màn hình 3 lần")}}
+document.addEventListener("visibilitychange",watchLeave);
+window.addEventListener("pagehide",()=>{if(examStarted&&!submitted){/* Không thể đảm bảo nộp bài khi trình duyệt bị đóng hoàn toàn. */}});
+async function sendResult(payload){
+ if(!GOOGLE_SCRIPT_URL.startsWith("https://script.google.com/"))return "Chưa cấu hình Google Sheets; kết quả hiện chỉ hiển thị trên màn hình.";
+ try{
+  await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body:"payload="+encodeURIComponent(JSON.stringify(payload))});
+  return "Đã gửi yêu cầu lưu kết quả tới Google Sheets. Thầy kiểm tra bảng tính để xác nhận dữ liệu đã nhận.";
+ }catch(e){return "Không gửi được dữ liệu (có thể do mạng hoặc cấu hình Apps Script). Hãy chụp/lưu kết quả và báo giáo viên."}
 }
-const SHEETS_WEB_APP_URL = ""; // Dán URL Web App Google Apps Script vào đây sau khi thầy cấu hình Google Sheets.
-$("startBtn").addEventListener("click",startExam);
-$("submitBtn").addEventListener("click",()=>{if(confirm("Em chắc chắn muốn nộp bài? Sau khi nộp sẽ không thể sửa đáp án."))finish("Học sinh chủ động nộp bài")});
-</script>
-</body>
-</html>
+async function submitExam(auto=false,reason="Học sinh nộp bài"){
+ if(submitted||submitting)return;if(!auto&&!confirm("Em chắc chắn muốn nộp bài? Sau khi nộp sẽ không thể chỉnh sửa."))return;
+ submitting=true;submitted=true;examStarted=false;if(timerId)clearInterval(timerId);
+ document.querySelectorAll("#exam input,#submitBtn").forEach(el=>el.disabled=true);
+ let points=0,mcScore=0,tfScore=0,shScore=0;const details=[];
+ mcqs.forEach((x,i)=>{const v=document.querySelector(`input[name="mc${i}"]:checked`),ok=!!v&&Number(v.value)===x.a;if(ok){points+=.25;mcScore+=.25}details.push({title:`Phần I · Câu ${i+1}`,ok,chosen:v?`${"ABCD"[+v.value]}. ${x.o[+v.value]}`:"Chưa trả lời",answer:`${"ABCD"[x.a]}. ${x.o[x.a]}`})});
+ tfs.forEach((x,i)=>x.s.forEach((s,j)=>{const v=document.querySelector(`input[name="tf${i}_${j}"]:checked`),ok=!!v&&(v.value==="true")===s[1];if(ok){points+=.25;tfScore+=.25}details.push({title:`Phần II · Câu ${i+1}${"abcd"[j]}`,ok,chosen:v?(v.value==="true"?"Đúng":"Sai"):"Chưa trả lời",answer:s[1]?"Đúng":"Sai",statement:s[0]})}));
+ shorts.forEach((x,i)=>{const raw=$(`short${i}`).value,ok=isShortCorrect(raw,x.a);if(ok){points+=.25;shScore+=.25}details.push({title:`Phần III · Câu ${i+1}`,ok,chosen:raw||"Chưa trả lời",answer:x.a})});
+ $("exam").classList.add("hidden");$("result").classList.remove("hidden");const name=$("studentName").value.trim(),cls=$("studentClass").value.trim();
+ $("resultStudent").textContent=`Học sinh: ${name} · Lớp: ${cls} · Lý do nộp: ${reason}`;
+ $("scoreText").textContent=`${points.toFixed(2).replace(".",",")} / 10,00`;
+ $("scoreDetail").textContent=`Trắc nghiệm: ${mcScore.toFixed(2).replace(".",",")}/4,50 · Đúng/Sai: ${tfScore.toFixed(2).replace(".",",")}/4,00 · Trả lời ngắn: ${shScore.toFixed(2).replace(".",",")}/1,50 điểm.`;
+ $("review").innerHTML='<h2>ĐỐI CHIẾU ĐÁP ÁN</h2>'+details.map(d=>`<div class="resultitem"><div class="${d.ok?"correct":"wrong"}">${d.ok?"✓ Đúng":"✗ Sai"} — ${d.title}</div>${d.statement?`<div>${d.statement}</div>`:""}<div>Em chọn/nhập: <b>${chemHtml(d.chosen)}</b></div><div>Đáp án đúng: <b>${chemHtml(d.answer)}</b></div></div>`).join("");
+ const payload={timestamp:new Date().toISOString(),studentName:name,className:cls,score:Number(points.toFixed(2)),multipleChoice:Number(mcScore.toFixed(2)),trueFalse:Number(tfScore.toFixed(2)),shortAnswer:Number(shScore.toFixed(2)),leaveCount,reason,answers:details};
+ $("sendStatus").textContent="Đang gửi kết quả…";window.scrollTo({top:0,behavior:"smooth"});
+ const status=await sendResult(payload);$("sendStatus").textContent=status;submitting=false;
+}
+function resetApp(){if(timerId)clearInterval(timerId);submitted=false;submitting=false;examStarted=false;remaining=2400;leaveCount=0;$("studentName").value="";$("studentClass").value="";$("result").classList.add("hidden");$("exam").classList.add("hidden");$("login").classList.remove("hidden");$("leaveCount").textContent="Số lần rời màn hình: 0/3";$("warning").textContent="";prepareAttempt();buildExam();buildNavigator();window.scrollTo({top:0,behavior:"smooth"})}
+$("startBtn").addEventListener("click",start);document.addEventListener("change",e=>{if(e.target.closest("#exam"))updateNavigator()});document.addEventListener("input",e=>{if(e.target.closest("#exam"))updateNavigator()});$("submitBtn").addEventListener("click",()=>submitExam(false));$("printBtn").addEventListener("click",()=>window.print());$("retryBtn").addEventListener("click",resetApp);prepareAttempt();buildExam();buildNavigator();
+</script></body></html>
